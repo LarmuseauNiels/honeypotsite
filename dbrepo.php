@@ -48,10 +48,10 @@ class dbrepo
     public function getUserFromID($userid)
     {
         try {
-            $sql = "SELECT * FROM members
+            $sql = "SELECT * FROM users
 					WHERE userid = :userid";
             $stmt = $this->DBtools->prepare($sql);
-            $stmt->bindParam(":userid", $userid, \PDO::PARAM_INT);
+            $stmt->bindParam(":userid", $userid);
             $stmt->execute();
             $user = $stmt->fetch(PDO::FETCH_OBJ);
         } catch (PDOException $e) {
@@ -67,7 +67,7 @@ class dbrepo
             $sql = "SELECT * FROM users
 					WHERE userid = :userid";
             $stmt = $this->DBtools->prepare($sql);
-            $stmt->bindParam(":userid", $userid, \PDO::PARAM_INT);
+            $stmt->bindParam(":userid", $userid);
             $stmt->execute();
             $user = $stmt->fetch(PDO::FETCH_OBJ);
         } catch (PDOException $e) {
@@ -82,7 +82,7 @@ class dbrepo
             $sql = "SELECT userid FROM users
 					WHERE username = :username";
             $stmt = $this->DBtools->prepare($sql);
-            $stmt->bindParam(":username", $username, \PDO::PARAM_INT);
+            $stmt->bindParam(":username", $username);
             $stmt->execute();
             $user = $stmt->fetch(PDO::FETCH_OBJ);
         } catch (PDOException $e) {
@@ -94,7 +94,7 @@ class dbrepo
     public function addMessage($userid,$message)
     {
         try {
-            $sql = "INSERT INTO messqges(userid,message)
+            $sql = "INSERT INTO messages(userid,message)
 						VALUES(:userid, :message)";
             $stmt = $this->DBtools->prepare($sql);
             $stmt->bindParam(":userid", $userid);
@@ -103,6 +103,19 @@ class dbrepo
         } catch (PDOException $e) {
             die($e->getMessage());
         }
+    }
+
+    public function getMessages()
+    {
+        try {
+            $sql = "SELECT * FROM messages";
+            $stmt = $this->DBtools->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+        return $result;
     }
 
 
