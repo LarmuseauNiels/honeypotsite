@@ -1,7 +1,8 @@
 <?php
+//todo configure mysql user account
 return array(
-    'server' => 'hostname',
-    'database' => 'databasename',
+    'server' => '127.0.0.1',
+    'database' => 'honeypot',
     'username' => 'username',
     'password' => 'password',
 );

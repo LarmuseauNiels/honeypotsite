@@ -61,21 +61,6 @@ class dbrepo
         return $user;
     }
 
-    public function getUserFromID($userid)
-    {
-        try {
-            $sql = "SELECT * FROM users
-					WHERE userid = :userid";
-            $stmt = $this->DBtools->prepare($sql);
-            $stmt->bindParam(":userid", $userid);
-            $stmt->execute();
-            $user = $stmt->fetch(PDO::FETCH_OBJ);
-        } catch (PDOException $e) {
-            die($e->getMessage());
-        }
-        return $user;
-    }
-
     public function getUseridFromName($username)
     {
         try {
@@ -118,6 +103,76 @@ class dbrepo
         return $result;
     }
 
+    public function addFeedback($userid,$message)
+    {
+        try {
+            $sql = "INSERT INTO feedback(userid,message)
+						VALUES(:userid, :message)";
+            $stmt = $this->DBtools->prepare($sql);
+            $stmt->bindParam(":userid", $userid);
+            $stmt->bindParam(":message", $message);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
 
+    public function getFeedback()
+    {
+        try {
+            $sql = "SELECT * FROM feedback";
+            $stmt = $this->DBtools->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+        return $result;
+    }
 
+    public function addProfileMessage($profileid,$senderid,$message)
+    {
+        try {
+            $sql = "INSERT INTO profielmessages(profileid,senderid,message)
+						VALUES(:profileid,:senderid,:message)";
+            $stmt = $this->DBtools->prepare($sql);
+            $stmt->bindParam(":profileid", $profileid);
+            $stmt->bindParam(":senderid", $senderid);
+            $stmt->bindParam(":message", $message);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function getProfileMessagesForUser($profileid)
+    {
+        try {
+            $sql = "SELECT * FROM profielmessages 
+            WHERE profileid = :profileid";
+            $stmt = $this->DBtools->prepare($sql);
+            $stmt->bindParam(":profileid", $profileid);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+        return $result;
+    }
+
+    public function addPicture($userid,$path)
+    {
+        //todo add picture table
+    }
+
+    public function getPictureForUser($userid)
+    {
+        //todo add picture table
+    }
+
+    public function authenticateUser($username,$password)
+    {
+        //todo
+    }
+    
 }
