@@ -160,14 +160,33 @@ class dbrepo
         return $result;
     }
 
-    public function addPicture($userid,$path)
+    public function addPicture($userid,$filepath)
     {
-        //todo add picture table
+        try {
+            $sql = "INSERT INTO photo(userid,filepath)
+						VALUES(:userid,:filepath)";
+            $stmt = $this->DBtools->prepare($sql);
+            $stmt->bindParam(":userid", $userid);
+            $stmt->bindParam(":filepath", $filepath);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
     }
 
     public function getPictureForUser($userid)
     {
-        //todo add picture table
+        try {
+            $sql = "SELECT filepath FROM photo
+					WHERE userid = :userid";
+            $stmt = $this->DBtools->prepare($sql);
+            $stmt->bindParam(":userid", $userid);
+            $stmt->execute();
+            $user = $stmt->fetch(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+        return $user;
     }
 
     public function authenticateUser($username,$password)
