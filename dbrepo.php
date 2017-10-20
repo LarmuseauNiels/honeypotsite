@@ -210,8 +210,30 @@ class dbrepo
             }
             else{return null;}  
     }
-    
-    //todo Administration related functions
 
-    //todo change password to varchar 255 extra space for salt and hash
+    public function deletemessage($messageid)
+    {
+        try {
+            $sql = "DELETE FROM messages
+            WHERE messageid = :messageid;";
+            $stmt = $this->DBtools->prepare($sql);
+            $stmt->bindParam(":messageid", $messageid);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function deleteprofielmessage($messageid)
+    {
+        try {
+            $sql = "DELETE FROM profielmessages
+            WHERE messageid = :messageid;";
+            $stmt = $this->DBtools->prepare($sql);
+            $stmt->bindParam(":messageid", $messageid);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
 }
