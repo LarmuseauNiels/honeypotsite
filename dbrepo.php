@@ -37,7 +37,7 @@ class dbrepo
 						VALUES(:username, :password,:email)";
             $stmt = $this->DBtools->prepare($sql);
             $stmt->bindParam(":username", $username);
-            $stmt->bindParam(":password",password_hash($password, PASSWORD_DEFAULT););
+            $stmt->bindParam(":password",password_hash($password, PASSWORD_DEFAULT));
             $stmt->bindParam(":email", $email);
             $stmt->execute();
         } catch (PDOException $e) {
@@ -203,7 +203,7 @@ class dbrepo
                 } catch (PDOException $e) {
                     die($e->getMessage());
                 }
-                if(password_verify (string $password , string $hash ){
+                if(password_verify($password,$hash)){
                     return $userid; 
                 }
                 else{return null;}          
@@ -235,5 +235,19 @@ class dbrepo
         } catch (PDOException $e) {
             die($e->getMessage());
         }
+    }
+
+    public function getrolefromuserid($userid){
+        try {
+            $sql = "SELECT role FROM users
+					WHERE userid = :userid";
+            $stmt = $this->DBtools->prepare($sql);
+            $stmt->bindParam(":userid", $userid);
+            $stmt->execute();
+            $role = $stmt->fetch(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+        return $role;
     }
 }

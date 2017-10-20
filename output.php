@@ -2,20 +2,34 @@
  class output
  {
     public static function navigation($activepage,$loggedin,$role){
+        echo '<div class="col-sm-3 sidenav"><h4>CCCP chat</h4><ul class="nav nav-pills nav-stacked">';
            
-            <div class="col-sm-3 sidenav"><h4>CCCP chat</h4><ul class="nav nav-pills nav-stacked">
-           
-           
-           if($activepage){$result += 'class="active"'}
-           
-                <li><a href="#">Chat</a></li>
-                <li><a href="#">Members</a></li>
-                <li><a href="#">My Profile</a></li>
-                <li><a href="#">Featback</a></li>
-                <li><a href="#">Admins</a></li>
-                </ul><br>
-            </div>
+          if(!$loggedin){
+                echo "<li";
+                if($activepage == 'loggin'){echo '  class="active" ';}
+                echo '><a href="#">loggin</a></li>';
+           }
+           else{   
+                echo "<li";
+                if($activepage == 'profile'){echo '  class="active" ';}
+                echo '><a href="#">profile</a></li>';
+           }
+
+           $tabs = array("1"=>"chat", "2"=>"members", "3"=>"feadback");
+           foreach($tabs as $x => $dis) {
+                echo "<li";
+                if($activepage == $dis){echo '  class="active" ';}
+                echo '><a href="'.$x.'">'.$dis.'</a></li>';
+            }
+            
+            if($role == 'a'){
+                echo "<li";
+                if($activepage == 'admin'){echo '  class="active" ';}
+                echo '><a href="#">admin</a></li>';
+            }
             ?>
+                                </ul><br>
+                            </div>
                         <div class="col-sm-9">
                     <?php
     }
