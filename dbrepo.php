@@ -37,7 +37,7 @@ class dbrepo
 						VALUES(:username, :password,:email)";
             $stmt = $this->DBtools->prepare($sql);
             $stmt->bindParam(":username", $username);
-            $stmt->bindParam(":password", $password);
+            $stmt->bindParam(":password",password_hash($password, PASSWORD_DEFAULT););
             $stmt->bindParam(":email", $email);
             $stmt->execute();
         } catch (PDOException $e) {
@@ -191,20 +191,27 @@ class dbrepo
 
     public function authenticateUser($username,$password)
     {
+        $userid = this.getUseridFromName($username);
+        if($userid != null){
             try {
-                $sql = "SELECT userid FROM users
-                    WHERE username = :username
-                    AND password = password";
+                $sql = "SELECT password FROM users
+                    WHERE userid = :userid";
                     $stmt = $this->DBtools->prepare($sql);
-                    $stmt->bindParam(":username", $username);
-                    $stmt->bindParam(":password", $password);
+                    $stmt->bindParam(":userid", $userid);
                     $stmt->execute();
-                    $userid = $stmt->fetch(PDO::FETCH_OBJ);
+                    $hash = $stmt->fetch(PDO::FETCH_OBJ);
                 } catch (PDOException $e) {
                     die($e->getMessage());
                 }
-            return $userid;       
+                if(password_verify (string $password , string $hash ){
+                    return $userid; 
+                }
+                else{return null;}          
+            }
+            else{return null;}  
     }
     
     //todo Administration related functions
+
+    //todo change password to varchar 255 extra space for salt and hash
 }
