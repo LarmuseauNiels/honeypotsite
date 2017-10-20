@@ -191,7 +191,20 @@ class dbrepo
 
     public function authenticateUser($username,$password)
     {
-        //todo
+            try {
+                $sql = "SELECT userid FROM users
+                    WHERE username = :username
+                    AND password = password";
+                    $stmt = $this->DBtools->prepare($sql);
+                    $stmt->bindParam(":username", $username);
+                    $stmt->bindParam(":password", $password);
+                    $stmt->execute();
+                    $userid = $stmt->fetch(PDO::FETCH_OBJ);
+                } catch (PDOException $e) {
+                    die($e->getMessage());
+                }
+            return $userid;       
     }
     
+    //todo Administration related functions
 }
