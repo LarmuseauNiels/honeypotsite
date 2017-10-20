@@ -1,21 +1,21 @@
 <?php
  class output
  {
-    public static function navigation($activepage,$loggedin,$role){
+    public static function navigation($activepage,$logedin,$role){
         echo '<div class="col-sm-3 sidenav"><h4>CCCP chat</h4><ul class="nav nav-pills nav-stacked">';
            
-          if(!$loggedin){
+          if(!$logedin){
                 echo "<li";
-                if($activepage == 'loggin'){echo '  class="active" ';}
-                echo '><a href="#">loggin</a></li>';
+                if($activepage == 'login'){echo '  class="active" ';}
+                echo '><a href="login.php">login</a></li>';
            }
            else{   
                 echo "<li";
                 if($activepage == 'profile'){echo '  class="active" ';}
-                echo '><a href="#">profile</a></li>';
+                echo '><a href="profile.php">profile</a></li>';
            }
 
-           $tabs = array("1"=>"chat", "2"=>"members", "3"=>"feadback");
+           $tabs = array("chat.php"=>"chat", "members.php"=>"members", "feadback.php"=>"feadback");
            foreach($tabs as $x => $dis) {
                 echo "<li";
                 if($activepage == $dis){echo '  class="active" ';}
@@ -25,7 +25,7 @@
             if($role == 'a'){
                 echo "<li";
                 if($activepage == 'admin'){echo '  class="active" ';}
-                echo '><a href="#">admin</a></li>';
+                echo '><a href="admin.php">admin</a></li>';
             }
             ?>
                                 </ul><br>

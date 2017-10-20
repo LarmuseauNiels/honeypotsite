@@ -2,7 +2,7 @@
 require_once 'autoloader.php';
 output::htmlheader();
 $authenticator = new auth();
-output::navigation("loggin",$authenticator->getLoggedin(),$authenticator->getRole());
+output::navigation("loggin",$authenticator->getLogedin(),$authenticator->getRole());
 
 
 

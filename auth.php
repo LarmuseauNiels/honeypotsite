@@ -19,7 +19,7 @@ class auth
         return $this->userid;
     }
 
-    public function getLoggedin(){
+    public function getLogedin(){
         return ($this->userid != null);
     }
 
