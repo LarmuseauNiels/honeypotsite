@@ -9,8 +9,8 @@ class dbrepo
         try {
             $configs = include('config.php');
             $this->dbrepo = new PDO("mysql:host=$configs[server]; dbname=$configs[database]; charset=utf8mb4",
-                $configs[username],
-                $configs[password],
+                'root',
+                '',
                 array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         } catch (PDOException $e) {
             die($e->getMessage());
@@ -32,12 +32,13 @@ class dbrepo
 
     public function addUser($username, $password, $email)
     {
+        $password = password_hash($password, PASSWORD_DEFAULT);
         try {
             $sql = "INSERT INTO users(username,password,email)
 						VALUES(:username, :password,:email)";
-            $stmt = $this->DBtools->prepare($sql);
+            $stmt = $this->dbrepo->prepare($sql);
             $stmt->bindParam(":username", $username);
-            $stmt->bindParam(":password",password_hash($password, PASSWORD_DEFAULT););
+            $stmt->bindParam(":password",$password);
             $stmt->bindParam(":email", $email);
             $stmt->execute();
         } catch (PDOException $e) {
@@ -50,7 +51,7 @@ class dbrepo
         try {
             $sql = "SELECT * FROM users
 					WHERE userid = :userid";
-            $stmt = $this->DBtools->prepare($sql);
+            $stmt = $this->dbrepo->prepare($sql);
             $stmt->bindParam(":userid", $userid);
             $stmt->execute();
             $user = $stmt->fetch(PDO::FETCH_OBJ);
@@ -66,8 +67,23 @@ class dbrepo
         try {
             $sql = "SELECT userid FROM users
 					WHERE username = :username";
-            $stmt = $this->DBtools->prepare($sql);
+            $stmt = $this->dbrepo->prepare($sql);
             $stmt->bindParam(":username", $username);
+            $stmt->execute();
+            $user = $stmt->fetch(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+        return $user;
+    }
+
+    public function getUseridFromEmail($email)
+    {
+        try {
+            $sql = "SELECT userid FROM users
+					WHERE email = :email";
+            $stmt = $this->dbrepo->prepare($sql);
+            $stmt->bindParam(":email", $email);
             $stmt->execute();
             $user = $stmt->fetch(PDO::FETCH_OBJ);
         } catch (PDOException $e) {
@@ -81,7 +97,7 @@ class dbrepo
         try {
             $sql = "INSERT INTO messages(userid,message)
 						VALUES(:userid, :message)";
-            $stmt = $this->DBtools->prepare($sql);
+            $stmt = $this->dbrepo->prepare($sql);
             $stmt->bindParam(":userid", $userid);
             $stmt->bindParam(":message", $message);
             $stmt->execute();
@@ -94,7 +110,7 @@ class dbrepo
     {
         try {
             $sql = "SELECT * FROM messages";
-            $stmt = $this->DBtools->prepare($sql);
+            $stmt = $this->dbrepo->prepare($sql);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_OBJ);
         } catch (PDOException $e) {
@@ -108,7 +124,7 @@ class dbrepo
         try {
             $sql = "INSERT INTO feedback(userid,message)
 						VALUES(:userid, :message)";
-            $stmt = $this->DBtools->prepare($sql);
+            $stmt = $this->dbrepo->prepare($sql);
             $stmt->bindParam(":userid", $userid);
             $stmt->bindParam(":message", $message);
             $stmt->execute();
@@ -121,7 +137,7 @@ class dbrepo
     {
         try {
             $sql = "SELECT * FROM feedback";
-            $stmt = $this->DBtools->prepare($sql);
+            $stmt = $this->dbrepo->prepare($sql);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_OBJ);
         } catch (PDOException $e) {
@@ -135,7 +151,7 @@ class dbrepo
         try {
             $sql = "INSERT INTO profielmessages(profileid,senderid,message)
 						VALUES(:profileid,:senderid,:message)";
-            $stmt = $this->DBtools->prepare($sql);
+            $stmt = $this->dbrepo->prepare($sql);
             $stmt->bindParam(":profileid", $profileid);
             $stmt->bindParam(":senderid", $senderid);
             $stmt->bindParam(":message", $message);
@@ -150,7 +166,7 @@ class dbrepo
         try {
             $sql = "SELECT * FROM profielmessages 
             WHERE profileid = :profileid";
-            $stmt = $this->DBtools->prepare($sql);
+            $stmt = $this->dbrepo->prepare($sql);
             $stmt->bindParam(":profileid", $profileid);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -165,7 +181,7 @@ class dbrepo
         try {
             $sql = "INSERT INTO photo(userid,filepath)
 						VALUES(:userid,:filepath)";
-            $stmt = $this->DBtools->prepare($sql);
+            $stmt = $this->dbrepo->prepare($sql);
             $stmt->bindParam(":userid", $userid);
             $stmt->bindParam(":filepath", $filepath);
             $stmt->execute();
@@ -179,7 +195,7 @@ class dbrepo
         try {
             $sql = "SELECT filepath FROM photo
 					WHERE userid = :userid";
-            $stmt = $this->DBtools->prepare($sql);
+            $stmt = $this->dbrepo->prepare($sql);
             $stmt->bindParam(":userid", $userid);
             $stmt->execute();
             $user = $stmt->fetch(PDO::FETCH_OBJ);
@@ -189,21 +205,23 @@ class dbrepo
         return $user;
     }
 
-    public function authenticateUser($username,$password)
+    public function authenticateUser($email,$password)
     {
-        $userid = this.getUseridFromName($username);
-        if($userid != null){
+        $row = $this::getUseridFromEmail($email);
+        
+        if($row != null){
             try {
+                $userid = $row->userid;
                 $sql = "SELECT password FROM users
                     WHERE userid = :userid";
-                    $stmt = $this->DBtools->prepare($sql);
-                    $stmt->bindParam(":userid", $userid);
+                    $stmt = $this->dbrepo->prepare($sql);
+                    $stmt->bindParam(":userid",$userid);
                     $stmt->execute();
                     $hash = $stmt->fetch(PDO::FETCH_OBJ);
                 } catch (PDOException $e) {
                     die($e->getMessage());
                 }
-                if(password_verify (string $password , string $hash ){
+                if(password_verify($password,$hash->password)){
                     return $userid; 
                 }
                 else{return null;}          
@@ -216,7 +234,7 @@ class dbrepo
         try {
             $sql = "DELETE FROM messages
             WHERE messageid = :messageid;";
-            $stmt = $this->DBtools->prepare($sql);
+            $stmt = $this->dbrepo->prepare($sql);
             $stmt->bindParam(":messageid", $messageid);
             $stmt->execute();
         } catch (PDOException $e) {
@@ -229,11 +247,25 @@ class dbrepo
         try {
             $sql = "DELETE FROM profielmessages
             WHERE messageid = :messageid;";
-            $stmt = $this->DBtools->prepare($sql);
+            $stmt = $this->dbrepo->prepare($sql);
             $stmt->bindParam(":messageid", $messageid);
             $stmt->execute();
         } catch (PDOException $e) {
             die($e->getMessage());
         }
+    }
+
+    public function getrolefromuserid($userid){
+        try {
+            $sql = "SELECT role FROM users
+					WHERE userid = :userid";
+            $stmt = $this->dbrepo->prepare($sql);
+            $stmt->bindParam(":userid", $userid);
+            $stmt->execute();
+            $role = $stmt->fetch(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+        return $role;
     }
 }
