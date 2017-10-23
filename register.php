@@ -106,7 +106,7 @@ $passError = '';
         <div class="form-group">
             <div class="input-group">
             <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-            <input type="text" name="name" class="form-control" placeholder="Enter Name" maxlength="50" value="<?php echo $name ?>" />
+            <input type="text" name="name" class="form-control" placeholder="Enter Name" maxlength="50" value="" />
             </div>
             <span class="text-danger"><?php echo $nameError; ?></span>
         </div>
@@ -114,7 +114,7 @@ $passError = '';
         <div class="form-group">
             <div class="input-group">
             <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-            <input type="email" name="email" class="form-control" placeholder="Enter Your Email" maxlength="40" value="<?php echo $email ?>" />
+            <input type="email" name="email" class="form-control" placeholder="Enter Your Email" maxlength="40" value="" />
             </div>
             <span class="text-danger"><?php echo $emailError; ?></span>
         </div>

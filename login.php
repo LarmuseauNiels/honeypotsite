@@ -8,7 +8,7 @@ output::navigation("login",$authenticator->getLogedin(),$authenticator->getRole(
 $error = false;
 $emailError = '';
 $passError = '';
-$errMSG = '';
+$errMSG = null;
 
 if( isset($_POST['btn-login']) ) {
 		$email = trim($_POST['email']);
@@ -62,7 +62,7 @@ if( isset($_POST['btn-login']) ) {
             </div>
 
             <?php
-			if ( isset($errMSG) ) {
+			if ( $errMSG != null) {
 
 				?>
 				<div class="form-group">
