@@ -14,7 +14,7 @@ output::navigation("chat",$authenticator->getLogedin(),$authenticator->getRole()
         <button type="submit" class="btn btn-success">Submit</button>
       </form>
       <br><br>
-      <p><span class="badge">2</span> Comments:</p><br>      
+      <p><span class="badge">3</span> Messages:</p><br>      
       <div class="row">
         <div>
         <div class="col-sm-2 text-center">

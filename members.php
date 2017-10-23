@@ -7,7 +7,7 @@ output::navigation("members",$authenticator->getLogedin(),$authenticator->getRol
 
 
 ?>
-<p><span class="badge">2</span> Comments:</p><br>      
+<p><span class="badge">2</span> Members:</p><br>      
 <div class="row">
   <div class="col-sm-2 text-center">
     <img src="https://i.imgur.com/0W49c50.png" class="img-circle" height="65" width="65" alt="Avatar">
