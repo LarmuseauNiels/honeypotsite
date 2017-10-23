@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2017 at 02:12 PM
+-- Generation Time: Oct 23, 2017 at 08:37 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -88,9 +88,17 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `userid` int(15) NOT NULL,
   `username` varchar(30) COLLATE utf8_bin NOT NULL,
-  `password` varchar(30) COLLATE utf8_bin NOT NULL,
-  `email` varchar(64) COLLATE utf8_bin NOT NULL
+  `password` varchar(255) COLLATE utf8_bin NOT NULL,
+  `email` varchar(64) COLLATE utf8_bin NOT NULL,
+  `role` varchar(1) COLLATE utf8_bin NOT NULL DEFAULT 'G'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`userid`, `username`, `password`, `email`, `role`) VALUES
+(3, 'ban', '$2y$10$S.QqdvO2hIPSpwlJEHoIHufIfiTwMOBT.JfZb3Z1d/G.myUeFuDKO', 'test@test.com', 'G');
 
 --
 -- Indexes for dumped tables
@@ -150,7 +158,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userid` int(15) NOT NULL AUTO_INCREMENT;
+  MODIFY `userid` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -185,9 +193,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-# Privileges for `honeypot`@`%`
-
-GRANT USAGE ON *.* TO 'honeypot'@'%' IDENTIFIED BY PASSWORD '*745D8F57EADEAB5BC16933044250F8E80390AAC0';
-
-GRANT ALL PRIVILEGES ON `honeypot`.* TO 'honeypot'@'%';
