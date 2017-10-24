@@ -18,7 +18,7 @@ output::navigation("loggin",$authenticator->getLogedin(),$authenticator->getRole
                 <div class="form-group">
                     <textarea class="form-control" rows="3" required></textarea>
                 </div>
-                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="submit" class="btn btn-success">Comment profile</button>
             </form>
             <br><br>
             <p><span class="badge">3</span> Messages:</p><br>
