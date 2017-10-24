@@ -15,11 +15,11 @@ figcaption
 {
     background-image: url("../images/background1.jpg");
     border: solid #2d84d2 4px;
+    height: auto;
 }
 #profileHead,#commentBox
 {
     width: 1000px;
-    height: 220px;
     border-radius: 5px;
     margin-left: auto;
     margin-right: auto;
@@ -56,11 +56,17 @@ img#changeImgIcon
     top: 17%;
 
 }
-input
+form#upload input
 {
     display: inline;
 }
-form
+
+.hide
+{
+    display: none;
+}
+
+form#upload
 {
     margin-left: auto;
     margin-right:auto;

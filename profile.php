@@ -10,9 +10,9 @@ output::navigation("loggin",$authenticator->getLogedin(),$authenticator->getRole
             <figure>
                 <a href="#"><img id="profileImg" src="assets/images/default-user-image.png">
                     <img id="changeImgIcon" src="assets/images/switch-camera-256.png"></a>
-                <form>
-                    <input type="file" value="file">
-                    <input type="submit" value="upload">
+                <form id="upload">
+                    <input type="file" accept="file_extension|image/*">
+                    <input type="submit" id="uploadbtn" value="upload">
                 </form>
                 <figcaption>Username</figcaption>
             </figure>

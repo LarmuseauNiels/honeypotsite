@@ -4,4 +4,10 @@
 
 $( document ).ready(function() {
     console.log( "ready!" );
+    $('#uploadbtn').on("click",hideUploadForm)
 });
+
+var hideUploadForm=function ()
+{
+    $('#upload').removeClass("hide");
+};
