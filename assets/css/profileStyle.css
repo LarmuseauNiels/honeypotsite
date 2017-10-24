@@ -1,30 +1,58 @@
-body
-{
-    background-color: white;
-}
 div#commentBox
 {
-
+    background-color: white;
     height: 600px;
 }
-
-
+figcaption
+{
+    margin-top: 10px;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 25px;
+    font-family: "Calibri Light",sans-serif;
+}
+#profileHead
+{
+    background-image: url("../images/background1.jpg");
+    border: solid #2d84d2 4px;
+}
 #profileHead,#commentBox
 {
     width: 1000px;
-    height: 100px;
-    background-color: darkgrey;
-    border: solid black 4px;
+    height: 220px;
     border-radius: 5px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 25px;
+
 }
+
 img#profileImg
 {
-    width: 75px;
-    height: 75px;
-    padding: 10px;
-    border-radius: 25px;
-    border-color: black;
+
+    width: 160px;
+    height: 160px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    border-radius: 50%;
+    border: solid #2d84d2 4px;
+}
+img#profileImg:hover + img#changeImgIcon
+{
+    display: block;
+    opacity: 0.6;
+}
+img#changeImgIcon
+{
+
+    display: none;
+    width: 45px;
+    height: 45px;
+    margin: auto;
+    position: absolute;
+    left: 49%;
+    top: 24%;
+
 }

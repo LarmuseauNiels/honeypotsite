@@ -7,7 +7,11 @@ output::navigation("loggin",$authenticator->getLogedin(),$authenticator->getRole
 ?>
     <div id="main">
         <div id="profileHead">
-            <img id="profileImg" src="assets/images/default-user-image.png">
+            <figure>
+                <a href="#"><img id="profileImg" src="assets/images/default-user-image.png">
+                    <img id="changeImgIcon" src="assets/images/switch-camera-256.png"></a>
+                <figcaption>Username</figcaption>
+            </figure>
         </div>
         <div id="commentBox">
             <form role="form">
