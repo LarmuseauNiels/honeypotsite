@@ -8,11 +8,11 @@ output::navigation("loggin",$authenticator->getLogedin(),$authenticator->getRole
     <div id="main">
         <div id="profileHead">
             <figure>
-                <a href="#"><img id="profileImg" src="assets/images/default-user-image.png">
+                <a href="#" id="profilePicture"><img id="profileImg" src="assets/images/default-user-image.png">
                     <img id="changeImgIcon" src="assets/images/switch-camera-256.png"></a>
-                <form id="upload">
-                    <input type="file" accept="file_extension|image/*">
-                    <input type="submit" id="uploadbtn" value="upload">
+                <form action="upload.php" method="POST" enctype="multipart/form-data" id="upload" class="hide">
+                    <input type="file" name="file" accept="file_extension|image/*">
+                    <button type="submit" name="submit" id="uploadbtn">upload</button>
                 </form>
                 <figcaption>Username</figcaption>
             </figure>
