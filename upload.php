@@ -5,7 +5,7 @@
  * Date: 24/10/2017
  * Time: 21:57
  */
-session_start();
+
 require_once 'autoloader.php';
 $authenticator = new auth();
 $db = dbrepo::getdbinstance();
