@@ -8,13 +8,11 @@ $db = dbrepo::getdbinstance();
 $username=$db->getUserFromID($userid)->username;
 output::navigation("loggin",$authenticator->getLogedin(),$authenticator->getRole());
 
-$pictureExists=$db->getPictureForUser($userid);
-$profilePicturePath="assets/images/default-user-image.png";
+$pictureExists=$db->getPictureForUser($userid)->filepath;
 if(isset($pictureExists))
 {
     //getPhotoPth from database
-    $profilePicturePath=$pictureExists->filepath;
-
+    $profilePicturePath=$pictureExists;
 }
 else
 {

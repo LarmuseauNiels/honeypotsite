@@ -5,7 +5,7 @@
  * Date: 24/10/2017
  * Time: 21:57
  */
-
+session_start();
 require_once 'autoloader.php';
 $authenticator = new auth();
 $db = dbrepo::getdbinstance();
@@ -33,7 +33,7 @@ if(isset($_POST['submit']))
             {
                 $userid=$authenticator->getUserid();
                 $pictureExists=$db->getPictureForUser($userid);
-                if(!isset($pictureExists))
+                if(!(isset($pictureExists->filepath))) // probleem --> hij wilt niet inserten
                 {
                     $filepath = "uploads/" . $userid . "." . $fileActualExt;
                     $db->addPicture($userid, $filepath);
