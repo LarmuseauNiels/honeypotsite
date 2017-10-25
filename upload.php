@@ -7,6 +7,8 @@
  */
 session_start();
 require_once 'autoloader.php';
+$authenticator = new auth();
+$db = dbrepo::getdbinstance();
 if(isset($_POST['submit']))
 {
     $file=$_FILES['file']; // file var die ALLE info hierin opslaat in een array
@@ -29,7 +31,19 @@ if(isset($_POST['submit']))
         {
             if($fileSize<1000000) // maximum grootte vd file bepalen in kb
             {
-                $fileNameNew=uniqid('', true).".".$fileActualExt; // de filenaam maken met een unique id+extensie
+                $userid=$authenticator->getUserid();
+                $pictureExists=$db->getPictureForUser($userid);
+                if(!isset($pictureExists))
+                {
+                    $filepath = "uploads/" . $userid . "." . $fileActualExt;
+                    $db->addPicture($userid, $filepath);
+                }
+                else
+                {
+                    $filepath = "uploads/" . $userid . "." . $fileActualExt;
+                    $db->updatePicture($userid, $filepath);
+                }
+                $fileNameNew=$userid.".".$fileActualExt; // de filenaam maken met een useid+extensie
                 $fileDestenation = 'uploads/'.$fileNameNew; // waar de file moet worden upgeload
                 move_uploaded_file($fileTmpName,$fileDestenation); // de file wordt nu geupload naar waar hij moet
                 // de tijdelijke plaats van de file wordt naar de eindbestemming gebracht

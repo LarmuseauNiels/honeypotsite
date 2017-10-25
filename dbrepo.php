@@ -190,6 +190,21 @@ class dbrepo
         }
     }
 
+    public function updatePicture($userid,$filepath)
+    {
+        try {
+            $sql = "UPDATE photo
+                        SET filepath = :filepath
+						WHERE userid =:userid";
+            $stmt = $this->dbrepo->prepare($sql);
+            $stmt->bindParam(":filepath", $filepath);
+            $stmt->bindParam(":userid", $userid);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
+
     public function getPictureForUser($userid)
     {
         try {
