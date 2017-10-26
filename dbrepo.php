@@ -194,7 +194,7 @@ class dbrepo
     {
         try {
             $sql = "UPDATE photo
-                        SET filepath = :filepath
+                        SET filepath =:filepath
 						WHERE userid =:userid";
             $stmt = $this->dbrepo->prepare($sql);
             $stmt->bindParam(":filepath", $filepath);

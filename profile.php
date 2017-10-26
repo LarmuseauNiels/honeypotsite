@@ -8,11 +8,11 @@ $db = dbrepo::getdbinstance();
 $username=$db->getUserFromID($userid)->username;
 output::navigation("loggin",$authenticator->getLogedin(),$authenticator->getRole());
 
-$pictureExists=$db->getPictureForUser($userid)->filepath;
-if(isset($pictureExists))
+$pictureExists=$db->getPictureForUser($userid);
+if(isset($pictureExists->filepath))
 {
     //getPhotoPth from database
-    $profilePicturePath=$pictureExists;
+    $profilePicturePath=$pictureExists->filepath;
 }
 else
 {
@@ -30,7 +30,7 @@ function viewProfileHead($username,$profilePicturePath)
 
    echo "<div id = 'profileHead' >";
    echo         "<figure >";
-   echo             "<a href = '#' id = 'profilePicture' ><img id = 'profileImg' src = '".$profilePicturePath."' >";
+   echo             "<a href = '#' id = 'profilePicture' ><img id = 'profileImg' src = '".$profilePicturePath."?nocache' >";
    echo                 "<img id = 'changeImgIcon' src = 'assets/images/switch-camera-256.png' ></a >";
    echo             "<form action = 'upload.php' method = 'POST' enctype = 'multipart/form-data' id = 'upload' class='hide' >";
    echo                 "<input type = 'file' name = 'file' accept = 'file_extension|image/*' >";
