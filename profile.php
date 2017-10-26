@@ -30,7 +30,7 @@ function viewProfileHead($username,$profilePicturePath)
 
    echo "<div id = 'profileHead' >";
    echo         "<figure >";
-   echo             "<a href = '#' id = 'profilePicture' ><img id = 'profileImg' src = '".$profilePicturePath."?nocache' >";
+   echo             "<a href = '#' id = 'profilePicture' ><img id = 'profileImg' src = '".$profilePicturePath."' >";
    echo                 "<img id = 'changeImgIcon' src = 'assets/images/switch-camera-256.png' ></a >";
    echo             "<form action = 'upload.php' method = 'POST' enctype = 'multipart/form-data' id = 'upload' class='hide' >";
    echo                 "<input type = 'file' name = 'file' accept = 'file_extension|image/*' >";

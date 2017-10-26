@@ -13,10 +13,13 @@ var showUploadForm=function ()
 var hideUploadForm=function ()
 {
     $('#upload').addClass("hide");
+    //window.location = window.location.href+'?eraseCache=true';
+
 };
 
 $( document ).ready(function() {
     console.log( "ready!" );
+
     $('a#profilePicture').on("click",showUploadForm);
     $('#uploadbtn').on("click",hideUploadForm);
 });
