@@ -48,6 +48,7 @@ if(isset($_POST['submit']))
                 move_uploaded_file($fileTmpName,$fileDestenation); // de file wordt nu geupload naar waar hij moet
                 // de tijdelijke plaats van de file wordt naar de eindbestemming gebracht
                 header("Location: profile.php?uploadsucces",true,302);
+
                 exit;
             }
             else
