@@ -24,7 +24,7 @@
                 echo '><a href="'.$x.'">'.$dis.'</a></li>';
             }
             
-            if($role == 'a'){
+            if($role === 'A'){
                 echo "<li";
                 if($activepage == 'admin'){echo '  class="active" ';}
                 echo '><a href="admin.php">admin</a></li>';

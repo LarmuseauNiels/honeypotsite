@@ -10,7 +10,7 @@ class auth
         if($this->userid == null){$this->role = 'g';}
         else{
             $db = dbrepo::getdbinstance();
-            $this->role = $db->getrolefromuserid($this->userid);
+            $this->role = $db->getrolefromuserid($this->userid)->role;
             $db->closeDB();
         }
     }
@@ -41,10 +41,10 @@ class auth
         $db = dbrepo::getdbinstance();
         $this->userid = $db->authenticateUser($email,$password);
         $_SESSION["userid"] = $this->userid;
-        if($this->userid == null){$this->role = 'g';}
+        if($this->userid == null){$this->role = 'G';}
         else{
             $db = dbrepo::getdbinstance();
-            $this->role = $db->getrolefromuserid($this->userid);
+            $this->role = $db->getrolefromuserid($this->userid)->role;
             $db->closeDB();
         }
         
