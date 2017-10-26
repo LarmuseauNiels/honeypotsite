@@ -7,41 +7,21 @@ output::navigation("members",$authenticator->getLogedin(),$authenticator->getRol
 
 $db = dbrepo::getdbinstance();
 $users = $db->getUsers();
-var_dump($users);
 
 echo('<p><span class="badge">'.count($users).'</span> Members:</p><br>');
 echo('<div class="row">');
 foreach ($users as $user){
-  echo ('<div class="col-sm-2 text-center"><a href="');
-  echo ('http://example.com');
-  echo ('" style="display:block"><img src="');
+  echo ('<div>');
+  echo ('<div class="col-sm-2 text-center">');
+  echo ('<a href="'.'http://example.com'.'">');
+  echo ('<img src="');
   echo ($user->filepath);
-  echo('" class="img-circle" height="65" width="65" alt="Avatar"></div><div class="col-sm-10"><br><h4>');
+  echo('" class="img-circle" height="65" width="65" alt="Avatar"></a></div><div class="col-sm-10"><br><h4>');
+  echo ('<a href="'.'http://example.com'.'">');
   echo ($user->username);
-  echo('</h4></a>');
-  echo('<small>remove</small>');
-  echo('<br></div>');
+  echo(' </a>');
+if($authenticator->getRole() === "A"){echo('<small>remove</small>');}
+  echo('</h4><br></div></div>');
 }
 echo('</div>');
-
-/*
-
-  <div class="col-sm-2 text-center">
-    <img src="https://i.imgur.com/0W49c50.png" class="img-circle" height="65" width="65" alt="Avatar">
-  </div>
-  <div class="col-sm-10">
-    <br>
-    <h4>Niels <small>Sep 29, 2017, 9:12 PM</small></h4>
-    <br>
-  </div>
-
-  <div class="col-sm-2 text-center">
-    <img src="https://i.imgur.com/qWoHxMv.jpg" class="img-circle" height="65" width="65" alt="Avatar">
-  </div>
-  <div class="col-sm-10">
-    <br>
-    <h4>John <small>Sep 25, 2017, 8:25 PM</small></h4>
-    <br>
-  </div>
-*/
 output::pageend();
