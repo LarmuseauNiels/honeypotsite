@@ -296,4 +296,17 @@ class dbrepo
         }
         return $result;
     }
+
+    public function deleteUser($userid)
+    {
+        try {
+            $sql = "DELETE FROM users
+            WHERE userid = :userid;";
+            $stmt = $this->dbrepo->prepare($sql);
+            $stmt->bindParam(":userid", $userid);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
 }
