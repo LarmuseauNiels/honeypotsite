@@ -12,7 +12,9 @@
            else{   
                 echo "<li";
                 if($activepage == 'profile'){echo '  class="active" ';}
-                echo '><a href="profile.php">profile</a></li>';
+                echo '><a href="profile.php">profile</a></li><li><a href="logout.php">uitloggen</a></li>';
+				
+				
            }
 
            $tabs = array("chat.php"=>"chat", "members.php"=>"members", "feadback.php"=>"feadback");
