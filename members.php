@@ -14,7 +14,8 @@ foreach ($users as $user){
   echo ('<div class="col-sm-2 text-center">');
   echo ('<a href="'.'http://example.com'.'">');
   echo ('<img src="');
-  echo ($user->filepath);
+  if ($user->filepath !== null){echo ($user->filepath);}
+  else{echo 'assets/images/default-user-image.png';}
   echo('" class="img-circle" height="65" width="65" alt="Avatar"></a></div><div class="col-sm-10"><br><h4>');
   echo ('<a href="'.'http://example.com'.'">');
   echo ($user->username);
