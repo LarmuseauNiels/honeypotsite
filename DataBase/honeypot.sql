@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 26, 2017 at 11:11 AM
+-- Generation Time: Oct 26, 2017 at 12:17 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -107,7 +107,10 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`userid`, `username`, `password`, `email`, `role`) VALUES
 (3, 'ban', '$2y$10$S.QqdvO2hIPSpwlJEHoIHufIfiTwMOBT.JfZb3Z1d/G.myUeFuDKO', 'test@test.com', 'G'),
-(4, 'niels', '$2y$10$ZlJ81KCh0V47Z38gkUPMe.4bDl9AC7nhVsSjnPSyn0eI7.VB1ylOW', 'niels@niels.com', 'G');
+(4, 'niels', '$2y$10$ZlJ81KCh0V47Z38gkUPMe.4bDl9AC7nhVsSjnPSyn0eI7.VB1ylOW', 'niels@niels.com', 'A'),
+(5, 'nielss', '$2y$10$y6NCiUcXhWIRi0H4K6EDcO/I6bbjeOQ4WaauWtkKaAwliQk950vA6', '1@1.com', 'G'),
+(6, 'a a', '$2y$10$NtmhxJYO0QvM5RW58dZKPeL05aRb/TmLXVTpLWCY29djhR.cEJK/S', 'a@a.Com', 'G'),
+(7, 'nielsssss', '$2y$10$GRbDZaB6b2r2ckJ6caeQX./Hlz7CADTXhfD7ztj8v/fNOkmmUT22q', '3@3.com', 'G');
 
 --
 -- Indexes for dumped tables
@@ -164,10 +167,16 @@ ALTER TABLE `messages`
   MODIFY `messageid` int(15) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `profielmessages`
+--
+ALTER TABLE `profielmessages`
+  MODIFY `messageid` int(15) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userid` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `userid` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
