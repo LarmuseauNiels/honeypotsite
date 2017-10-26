@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2017 at 08:37 PM
+-- Generation Time: Oct 26, 2017 at 11:11 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -60,8 +60,16 @@ CREATE TABLE `messages` (
 DROP TABLE IF EXISTS `photo`;
 CREATE TABLE `photo` (
   `userid` int(15) NOT NULL,
-  `filepath` varchar(30) COLLATE utf8_bin NOT NULL
+  `filepath` varchar(255) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `photo`
+--
+
+INSERT INTO `photo` (`userid`, `filepath`) VALUES
+(3, 'uploads/3.jpg'),
+(4, 'uploads/4.jpg');
 
 -- --------------------------------------------------------
 
@@ -98,7 +106,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userid`, `username`, `password`, `email`, `role`) VALUES
-(3, 'ban', '$2y$10$S.QqdvO2hIPSpwlJEHoIHufIfiTwMOBT.JfZb3Z1d/G.myUeFuDKO', 'test@test.com', 'G');
+(3, 'ban', '$2y$10$S.QqdvO2hIPSpwlJEHoIHufIfiTwMOBT.JfZb3Z1d/G.myUeFuDKO', 'test@test.com', 'G'),
+(4, 'niels', '$2y$10$ZlJ81KCh0V47Z38gkUPMe.4bDl9AC7nhVsSjnPSyn0eI7.VB1ylOW', 'niels@niels.com', 'G');
 
 --
 -- Indexes for dumped tables
@@ -158,7 +167,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userid` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `userid` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
