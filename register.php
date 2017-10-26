@@ -43,13 +43,13 @@ $passError = '';
 			$error = true;
 			$emailError = "Please enter valid email address.";
 		} else {
-            // check email exist or not
-            //TODO make check for email already in DB
-            /*
-			if($count!=0){
+            $db = dbrepo::getdbinstance();
+            $emailuserid = $db->getUseridFromEmail($email);
+            $db->closeDB();
+			if($emailuserid){
 				$error = true;
 				$emailError = "Provided Email is already in use.";
-			}*/
+			}
 		}
 		// password validation
 		if (empty($pass)){
