@@ -41,15 +41,17 @@ function viewProfileHead($username,$profilePicturePath)
    echo     "</div >";
 
 }
+
+
 function viewBodyProfile()
 {
     ?>
     <div id="commentBox">
-        <form role="form">
+        <form role="form" method="POST" action="proceedmessage.php">
             <div class="form-group">
-                <textarea class="form-control" rows="3" required></textarea>
+                <textarea name="message" class="form-control" rows="3" required></textarea>
             </div>
-            <button type="submit" class="btn btn-success">Comment profile</button>
+            <button type="submit" name="submit" class="btn btn-success">Comment profile</button>
         </form>
         <br><br>
         <p><span class="badge">3</span> Messages:</p><br>
