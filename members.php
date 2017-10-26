@@ -7,7 +7,6 @@ output::navigation("members",$authenticator->getLogedin(),$authenticator->getRol
 
 $db = dbrepo::getdbinstance();
 $users = $db->getUsers();
-
 echo('<p><span class="badge">'.count($users).'</span> Members:</p><br>');
 echo('<div class="row">');
 foreach ($users as $user){
