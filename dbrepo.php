@@ -283,4 +283,17 @@ class dbrepo
         }
         return $role;
     }
+
+    public function getUsers()
+    {
+        try {
+            $sql = "SELECT users.userid,username,filepath FROM users LEFT JOIN photo on users.userid = photo.userid";
+            $stmt = $this->dbrepo->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+        return $result;
+    }
 }
