@@ -22,16 +22,13 @@ else
 }
 
 $profileMessagesObj=$db->getProfileMessagesForUser($userid);
-$profilePictureObj=$db->getPictureForUser($userid);
-$userObj=$db->getUserFromID($userid);
 
 viewProfileHead($username,$profilePicturePath);
-viewBodyProfile($profileMessagesObj,$profilePictureObj,$userObj);
+viewBodyProfile($profileMessagesObj,$db);
 
 
 function viewProfileHead($username,$profilePicturePath)
 {
-
 
    echo "<div id = 'profileHead' >";
    echo         "<figure >";
@@ -47,10 +44,7 @@ function viewProfileHead($username,$profilePicturePath)
 
 }
 
-
-
-
-function viewBodyProfile($profileMessagesObj,$profilePictureObj,$userObj)
+function viewBodyProfile($profileMessagesObj,$db)
 {
 
     ?>
@@ -66,15 +60,12 @@ function viewBodyProfile($profileMessagesObj,$profilePictureObj,$userObj)
         echo "<p><span class='badge'>".sizeof($profileMessagesObj)."</span> Messages:</p><br>";
         echo "<div class='row'>";
 
-
-
-
-
-            function toonAlleMessages($profileMessagesObj,$profilePictureObj,$userObj)
+            function toonAlleMessages($profileMessagesObj,$db)
             {
                 foreach ($profileMessagesObj as $obj){
+                    $profilePictureObj=$db->getPictureForUser($obj->senderid);
+                    $userObj=$db->getUserFromID($obj->senderid);
                     toonProfileMessage($userObj->username,$profilePictureObj->filepath,$obj->timestamp,$obj->message);
-
                 }
             }
 
@@ -91,17 +82,10 @@ function viewBodyProfile($profileMessagesObj,$profilePictureObj,$userObj)
                 echo         "</div>";
                 echo     "</div>";
             }
-            toonAlleMessages($profileMessagesObj,$profilePictureObj,$userObj);
-
-
+            toonAlleMessages($profileMessagesObj,$db);
             ?>
-
         </div>
     </div>
     <?php
-
-
 }
-
-
 output::pageend();
