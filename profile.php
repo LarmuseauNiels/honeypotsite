@@ -80,15 +80,17 @@ function viewBodyProfile($profileMessagesObj,$db,$curprofileid)
                 foreach ($profileMessagesObj as $obj){
                     $profilePictureObj=$db->getPictureForUser($obj->senderid);
                     $userObj=$db->getUserFromID($obj->senderid);
-                    toonProfileMessage($userObj->username,$profilePictureObj->filepath,$obj->timestamp,$obj->message);
+                    toonProfileMessage($userObj->username,$profilePictureObj->filepath,$obj->timestamp,$obj->message,'profile.php?id='.$userObj->userid);
                 }
             }
 
-            function toonProfileMessage($username,$userPicture,$datePostedComment,$postedProfileMessage)
+            function toonProfileMessage($username,$userPicture,$datePostedComment,$postedProfileMessage,$userurl)
             {
                 echo     "<div>";
                 echo         "<div class='col-sm-2 text-center'>";
+                echo           '<a href="'.$userurl.'">';
                 echo             "<img src='".$userPicture."' class='img-circle' height='65' width='65' alt='Avatar'>";
+                echo           '</a>';
                 echo         "</div>";
                 echo         "<div class='col-sm-10'>";
                 echo             "<h4> ".$username." <small>".$datePostedComment."</small></h4>";
