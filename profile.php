@@ -73,7 +73,7 @@ function viewBodyProfile($profileMessagesObj,$db,$curprofileid)
         <br><br>
         <?php
         echo "<p><span class='badge'>".sizeof($profileMessagesObj)."</span> Messages:</p><br>";
-        echo "<div class='row'>";
+        echo "<div class='row' id='messages'> ";
 
             function toonAlleMessages($profileMessagesObj,$db)
             {

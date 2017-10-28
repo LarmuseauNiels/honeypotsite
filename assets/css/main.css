@@ -1,4 +1,4 @@
-.row.content {height: 1000px}
+.row.content {height:100%}
 
 .sidenav {
   background-color: #f1f1f1;
@@ -6,14 +6,19 @@
 }
 
 footer {
+  height: 5%;
   background-color: #555;
   color: white;
   padding: 15px;
 }
 
+html {height: 100%;}
+body {height: 100%;}
+body>div:first-child {height: 95%;}
+
 @media screen and (max-width: 767px) {
   .sidenav {
-    height: auto;
+    height: 100%;
     padding: 15px;
   }
   .row.content {height: auto;} 

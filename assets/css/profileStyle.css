@@ -3,6 +3,16 @@ div#commentBox
     background-color: white;
     height: 600px;
 }
+
+div#messages{
+    height: 65%;
+    overflow: scroll;
+    overflow-x:hidden;
+    
+}
+div#messages::-webkit-scrollbar { 
+    display: none; 
+}
 figcaption
 {
     margin-top: 10px;
