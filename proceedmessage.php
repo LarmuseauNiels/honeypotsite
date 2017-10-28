@@ -15,10 +15,12 @@ $db = dbrepo::getdbinstance();
 
 if(isset($_POST['submit']))
 {
+    $profileid=$_POST['profileid'];
+    if($db->getUserFromID($profileid) == null){$profileid = $userid;}
     $message=$_POST['message'];
-    $db->addProfileMessage($userid,$userid,$message);
+    $db->addProfileMessage($profileid,$userid,$message);
 }
-header("Location: profile.php?postsucces");
+header("Location: profile.php?id=".$profileid);
 /*
 $profileMessagesObj=$db->getProfileMessagesForUser($userid);
 $profilePictureObj=$db->getPictureForUser($userid);

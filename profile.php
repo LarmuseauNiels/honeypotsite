@@ -5,10 +5,17 @@ output::htmlheader();
 $authenticator = new auth();
 $userid=$authenticator->getUserid();
 $db = dbrepo::getdbinstance();
-$username=$db->getUserFromID($userid)->username;
 output::navigation("loggin",$authenticator->getLogedin(),$authenticator->getRole());
 
-$pictureExists=$db->getPictureForUser($userid);
+if (isset($_GET['id'])) {
+    $curprofileid = $_GET['id'];
+    if($db->getUserFromID($curprofileid) == null){$curprofileid = $userid;}
+}else{
+    $curprofileid = $userid;
+}
+$username=$db->getUserFromID($curprofileid)->username;
+
+$pictureExists=$db->getPictureForUser($curprofileid);
 if(isset($pictureExists->filepath))
 {
     //getPhotoPth from database
@@ -18,18 +25,16 @@ else
 {
     //give defaultpicture
     $profilePicturePath="assets/images/default-user-image.png";
-
 }
 
-$profileMessagesObj=$db->getProfileMessagesForUser($userid);
+$profileMessagesObj=$db->getProfileMessagesForUser($curprofileid);
+if($curprofileid == $userid){viewProfileHead($username,$profilePicturePath);}
+else { viewOtherProfileHead($username,$profilePicturePath);}
 
-viewProfileHead($username,$profilePicturePath);
-viewBodyProfile($profileMessagesObj,$db);
-
+viewBodyProfile($profileMessagesObj,$db,$curprofileid);
 
 function viewProfileHead($username,$profilePicturePath)
 {
-
    echo "<div id = 'profileHead' >";
    echo         "<figure >";
    echo             "<a href = '#' id = 'profilePicture' ><img id = 'profileImg' src = '".$profilePicturePath."' >";
@@ -41,15 +46,25 @@ function viewProfileHead($username,$profilePicturePath)
    echo             "<figcaption >".$username."</figcaption >";
    echo         "</figure >";
    echo     "</div >";
-
 }
 
-function viewBodyProfile($profileMessagesObj,$db)
+function viewOtherProfileHead($username,$profilePicturePath)
+{
+   echo "<div id = 'profileHead'>";
+   echo         "<figure>";
+   echo             "<img id = 'profileImg' src = '".$profilePicturePath."'>";
+   echo             "<figcaption >".$username."</figcaption>";
+   echo         "</figure>";
+   echo     "</div>";
+}
+
+function viewBodyProfile($profileMessagesObj,$db,$curprofileid)
 {
 
     ?>
     <div id="commentBox">
         <form role="form" method="POST" action="proceedmessage.php">
+            <input type="hidden" value="<?php echo $curprofileid ?>" name="profileid" />
             <div class="form-group">
                 <textarea name="message" class="form-control" rows="3" required></textarea>
             </div>
