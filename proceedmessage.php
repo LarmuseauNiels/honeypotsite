@@ -12,7 +12,8 @@ output::htmlheader();
 $authenticator=new auth();
 $userid=$authenticator->getUserid();
 $db = dbrepo::getdbinstance();
-
+if($userid == null){header("Location: login.php");}
+else{
 if(isset($_POST['submit']))
 {
     $profileid=$_POST['profileid'];
@@ -21,6 +22,7 @@ if(isset($_POST['submit']))
     $db->addProfileMessage($profileid,$userid,$message);
 }
 header("Location: profile.php?id=".$profileid);
+}
 /*
 $profileMessagesObj=$db->getProfileMessagesForUser($userid);
 $profilePictureObj=$db->getPictureForUser($userid);
