@@ -43,7 +43,9 @@ function toonMessages($messages,$db,$a)
       $profilePictureObj=$db->getPictureForUser($message->userid);
       $userObj=$db->getUserFromID($message->userid);
       echo "  <div class='col-sm-2 text-center'>";
+      echo           '<a href="'.'profile.php?id='.$message->userid.'">';
       echo "    <img src='".$profilePictureObj->filepath."' class='img-circle' height='65' width='65' alt='Avatar'>";
+      echo           '</a>';
       echo "  </div>";
       echo "  <div class='col-sm-10'>";
       echo "    <h4>".$userObj->username."<small>  ".$message->timestamp."</small></h4>";
