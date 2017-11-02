@@ -32,6 +32,10 @@ class dbrepo
 
     public function addUser($username, $password, $email)
     {
+        $username = $this->sanitize($username);
+        $password = $this->sanitize($password);
+        $email = $this->sanitize($email);
+
         $password = password_hash($password, PASSWORD_DEFAULT);
         try {
             $sql = "INSERT INTO users(username,password,email)
@@ -48,6 +52,8 @@ class dbrepo
 
     public function getUserFromID($userid)
     {
+        $userid = $this->sanitize($userid);
+
         try {
             $sql = "SELECT * FROM users
 					WHERE userid = :userid";
@@ -64,6 +70,8 @@ class dbrepo
 
     public function getUseridFromName($username)
     {
+        $username = $this->sanitize($username);
+
         try {
             $sql = "SELECT userid FROM users
 					WHERE username = :username";
@@ -79,6 +87,8 @@ class dbrepo
 
     public function getUseridFromEmail($email)
     {
+        $email = $this->sanitize($email);
+
         try {
             $sql = "SELECT userid FROM users
 					WHERE email = :email";
@@ -94,6 +104,9 @@ class dbrepo
 
     public function addMessage($userid,$message)
     {
+        $userid = $this->sanitize($userid);
+        $message = $this->sanitize($message);
+
         try {
             $sql = "INSERT INTO messages(userid,message)
 						VALUES(:userid, :message)";
@@ -121,6 +134,9 @@ class dbrepo
 
     public function addFeedback($userid,$message)
     {
+        $userid = $this->sanitize($userid);
+        $message = $this->sanitize($message);
+
         try {
             $sql = "INSERT INTO feedback(userid,message)
 						VALUES(:userid, :message)";
@@ -148,6 +164,10 @@ class dbrepo
 
     public function addProfileMessage($profileid,$senderid,$message)
     {
+        $profileid = $this->sanitize($profileid);
+        $senderid = $this->sanitize($senderid);
+        $message = $this->sanitize($message);
+
         try {
             $sql = "INSERT INTO profielmessages(profileid,senderid,message)
 						VALUES(:profileid,:senderid,:message)";
@@ -163,6 +183,8 @@ class dbrepo
 
     public function getProfileMessagesForUser($profileid)
     {
+        $profileid = $this->sanitize($profileid);
+
         try {
             $sql = "SELECT * FROM profielmessages 
             WHERE profileid = :profileid";
@@ -178,6 +200,9 @@ class dbrepo
 
     public function addPicture($userid,$filepath)
     {
+        $userid = $this->sanitize($userid);
+        $filepath = $this->sanitize($filepath);
+        
         try {
             $sql = "INSERT INTO photo(userid,filepath)
 						VALUES(:userid,:filepath)";
@@ -192,6 +217,9 @@ class dbrepo
 
     public function updatePicture($userid,$filepath)
     {
+        $userid = $this->sanitize($userid);
+        $filepath = $this->sanitize($filepath);
+
         try {
             $sql = "UPDATE photo
                         SET filepath =:filepath
@@ -207,6 +235,8 @@ class dbrepo
 
     public function getPictureForUser($userid)
     {
+        $userid = $this->sanitize($userid);
+
         try {
             $sql = "SELECT filepath FROM photo
 					WHERE userid = :userid";
@@ -222,6 +252,9 @@ class dbrepo
 
     public function authenticateUser($email,$password)
     {
+        $email = $this->sanitize($email);
+        $password = $this->sanitize($password);
+
         $row = $this::getUseridFromEmail($email);
         
         if($row != null){
@@ -246,6 +279,8 @@ class dbrepo
 
     public function deletemessage($messageid)
     {
+        $messageid = $this->sanitize($messageid);
+
         try {
             $sql = "DELETE FROM messages
             WHERE messageid = :messageid;";
@@ -259,6 +294,8 @@ class dbrepo
 
     public function deleteprofielmessage($messageid)
     {
+        $messageid = $this->sanitize($messageid);
+
         try {
             $sql = "DELETE FROM profielmessages
             WHERE messageid = :messageid;";
@@ -271,6 +308,8 @@ class dbrepo
     }
 
     public function getrolefromuserid($userid){
+        $userid = $this->sanitize($userid);
+
         try {
             $sql = "SELECT role FROM users
 					WHERE userid = :userid";
@@ -299,6 +338,8 @@ class dbrepo
 
     public function deleteUser($userid)
     {
+        $userid = $this->sanitize($userid);
+
         try {
             $sql = "DELETE FROM users
             WHERE userid = :userid;";
@@ -308,5 +349,12 @@ class dbrepo
         } catch (PDOException $e) {
             die($e->getMessage());
         }
+    }
+
+    private function sanitize($var){
+        $var = trim($var);
+		$var = strip_tags($var);
+        $var = htmlspecialchars($var);
+        return $var;
     }
 }
