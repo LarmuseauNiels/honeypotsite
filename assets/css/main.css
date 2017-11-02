@@ -1,4 +1,5 @@
 .row.content {height:100%}
+.row.content>.col-sm-9 {height:100%}
 
 .sidenav {
   background-color: #f1f1f1;
@@ -12,14 +13,32 @@ footer {
   padding: 15px;
 }
 
+#chatmessages{
+  height: 75%;
+  overflow: scroll;
+  overflow-x:hidden;
+}
+.chatpostmessage{height: 20%}
+
+
+#chatmessages.logedout{
+  height: 100%;
+}
+#chatmessages::-webkit-scrollbar {display: none; }
+
 html {height: 100%;}
 body {height: 100%;}
 body>div:first-child {height: 95%;}
 
 @media screen and (max-width: 767px) {
   .sidenav {
-    height: 100%;
+    height: 15%;
     padding: 15px;
+    overflow: scroll;
+    overflow-x:hidden;
   }
-  .row.content {height: auto;} 
+  .chatpostmessage{height: 25%}
+  .sidenav::-webkit-scrollbar {display: none; }
+  body>div:first-child {height: 95%;}
+  .row.content {height: 85%;} 
 }

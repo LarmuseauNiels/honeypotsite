@@ -31,7 +31,7 @@ $profileMessagesObj=$db->getProfileMessagesForUser($curprofileid);
 if($curprofileid == $userid){viewProfileHead($username,$profilePicturePath);}
 else { viewOtherProfileHead($username,$profilePicturePath);}
 
-viewBodyProfile($profileMessagesObj,$db,$curprofileid);
+viewBodyProfile($profileMessagesObj,$db,$curprofileid,$authenticator->getLogedin());
 
 function viewProfileHead($username,$profilePicturePath)
 {
@@ -58,20 +58,23 @@ function viewOtherProfileHead($username,$profilePicturePath)
    echo     "</div>";
 }
 
-function viewBodyProfile($profileMessagesObj,$db,$curprofileid)
+function viewBodyProfile($profileMessagesObj,$db,$curprofileid,$logedin)
 {
 
     ?>
-    <div id="commentBox">
-        <form role="form" method="POST" action="proceedmessage.php">
-            <input type="hidden" value="<?php echo $curprofileid ?>" name="profileid" />
-            <div class="form-group">
-                <textarea name="message" class="form-control" rows="3" required></textarea>
-            </div>
-            <button type="submit" name="submit" class="btn btn-success">Comment profile</button>
-        </form>
-        <br><br>
-        <?php
+    <div id="commentBox"><?php 
+        if($logedin){
+            ?>
+            <form role="form" method="POST" action="proceedmessage.php">
+                <input type="hidden" value="<?php echo $curprofileid ?>" name="profileid" />
+                <div class="form-group">
+                    <textarea name="message" class="form-control" rows="3" required></textarea>
+                </div>
+                <button type="submit" name="submit" class="btn btn-success">Comment profile</button>
+            </form>
+            <br><br>
+            <?php
+        }
         echo "<p><span class='badge'>".sizeof($profileMessagesObj)."</span> Messages:</p><br>";
         echo "<div class='row' id='messages'> ";
 
