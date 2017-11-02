@@ -8,7 +8,7 @@ output::navigation("members",$authenticator->getLogedin(),$authenticator->getRol
 $db = dbrepo::getdbinstance();
 $users = $db->getUsers();
 echo('<p><span class="badge">'.count($users).'</span> Members:</p><br>');
-echo('<div class="row">');
+echo('<div class="row members">');
 foreach ($users as $user){
   $userurl = 'profile.php?id='.$user->userid;
   echo ('<div>');

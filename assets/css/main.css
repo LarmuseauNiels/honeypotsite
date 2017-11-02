@@ -19,12 +19,17 @@ footer {
   overflow-x:hidden;
 }
 .chatpostmessage{height: 20%}
-
+.members{
+  height: 90%;
+  overflow: scroll;
+  overflow-x:hidden;
+}
 
 #chatmessages.logedout{
   height: 100%;
 }
 #chatmessages::-webkit-scrollbar {display: none; }
+.members::-webkit-scrollbar {display: none; }
 
 html {height: 100%;}
 body {height: 100%;}
