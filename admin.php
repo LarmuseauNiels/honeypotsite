@@ -30,7 +30,7 @@ if($authenticator->getLogedin()&& ($authenticator->getRole() == 'A')){
         header("Location: profile.php");
     }
     
-    $messages = $db->getMessages();
+    $messages = $db->getFeedback();
     toonFeedback($messages,$db);
 
 
@@ -54,7 +54,7 @@ function toonFeedback($messages,$db)
       echo           '</a>';
       echo "  </div>";
       echo "  <div class='col-sm-10'>";
-      echo "    <h4>".$userObj->username."<small>  ".$message->timestamp."</small></h4>";
+      echo "    <h4>".$userObj->username."<small>  </small></h4>";
       echo "    <p>".$message->message."</p>";
       echo "    <br>";
       echo "  </div>";
