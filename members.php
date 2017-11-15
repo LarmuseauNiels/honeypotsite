@@ -21,7 +21,7 @@ foreach ($users as $user){
   echo ('<a href="'.$userurl.'">');
   echo ($user->username);
   echo(' </a>');
-if($authenticator->getRole() === "A"){echo('<small>remove</small>');}
+if($authenticator->getRole() == "A"){echo('<a href="admin.php?remuser='.$user->userid.'">     <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#000000" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" /></svg></a>');}
   echo('</h4><br></div></div>');
 }
 echo('</div>');

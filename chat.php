@@ -18,7 +18,7 @@ if($authenticator->getLogedin()){
   }
 }
 $messages = $db->getMessages();
-toonMessages($messages,$db,$a);
+toonMessages($messages,$db,$a,$authenticator->getRole());
 
 function showPostaMessage()
 {
@@ -33,7 +33,7 @@ function showPostaMessage()
   <?php
 }
 
-function toonMessages($messages,$db,$a)
+function toonMessages($messages,$db,$a,$role)
 {
   
   echo "<div id='chatmessages' ".$a.">";
@@ -49,8 +49,9 @@ function toonMessages($messages,$db,$a)
       echo "  </div>";
       echo "  <div class='col-sm-10'>";
       echo "    <h4>".$userObj->username."<small>  ".$message->timestamp."</small></h4>";
-      echo "    <p>".$message->message."</p>";
-      echo "    <br>";
+      echo "    <p>".$message->message;
+      if($role == "A"){echo('<a href="admin.php?remmsg='.$message->messageid.'"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="#000000" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" /></svg></a>');}      
+      echo "</p>    <br>";
       echo "  </div>";
     }
   echo "</div>";
