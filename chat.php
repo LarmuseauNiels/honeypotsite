@@ -42,7 +42,7 @@ function toonMessages($messages,$db,$a,$role)
     foreach($messages as $message){
       $profilePictureObj=$db->getPictureForUser($message->userid);
       if($profilePictureObj == null){$picture = "assets/images/default-user-image.png";}
-      else{$picture = profilePictureObj->filepath;}
+      else{$picture = $profilePictureObj->filepath;}
       $userObj=$db->getUserFromID($message->userid);
       echo "  <div class='col-sm-2 text-center'>";
       echo           '<a href="'.'profile.php?id='.$message->userid.'">';
