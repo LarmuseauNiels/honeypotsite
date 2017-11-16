@@ -10,6 +10,9 @@ output::navigation("feadback",$authenticator->getLogedin(),$authenticator->getRo
   <div class="form-group">
     <textarea class="form-control" rows="6" name="feedback" required></textarea>
   </div>
+  <div class="captcha_wrapper">
+					<div class="g-recaptcha" data-sitekey="6Lfu_DgUAAAAAFSmpIZaudHNfZlJDq5GbHBa5Ofz"></div>
+		</div>
   <button type="submit" class="btn btn-success" name="submit">Submit</button>
 </form>
 <?php

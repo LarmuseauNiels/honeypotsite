@@ -10,7 +10,14 @@ $emailError = '';
 $passError = '';
 $errMSG = null;
 
+
+
+
 if( isset($_POST['btn-login']) ) {
+
+	$response = $_POST["g-recaptcha-response"];
+	
+	if(!captcha::checkresponce($response)){$error = true;header("Location: login.php");}
 		$email = trim($_POST['email']);
 		$email = strip_tags($email);
 		$email = htmlspecialchars($email);
@@ -43,8 +50,8 @@ if( isset($_POST['btn-login']) ) {
 			}
 
         }
-    }
-
+	
+}
 
 ?>
 
@@ -92,6 +99,9 @@ if( isset($_POST['btn-login']) ) {
 
             <div class="form-group">
             	<hr />
+				<div class="captcha_wrapper">
+					<div class="g-recaptcha" data-sitekey="6Lfu_DgUAAAAAFSmpIZaudHNfZlJDq5GbHBa5Ofz"></div>
+				</div>
             </div>
 
             <div class="form-group">
@@ -113,3 +123,4 @@ if( isset($_POST['btn-login']) ) {
 
 <?php 
 output::pageend();?>
+

@@ -16,10 +16,14 @@ if($userid == null){header("Location: login.php");}
 else{
 if(isset($_POST['submit']))
 {
+    $response = $_POST["g-recaptcha-response"];
+    if(captcha::checkresponce($response)){
     $profileid=$_POST['profileid'];
     if($db->getUserFromID($profileid) == null){$profileid = $userid;}
     $message=$_POST['message'];
     $db->addProfileMessage($profileid,$userid,$message);
+}
+else{header("Location: profile.php?id=".$profileid);}
 }
 header("Location: profile.php?id=".$profileid);
 }
