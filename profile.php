@@ -82,8 +82,10 @@ function viewBodyProfile($profileMessagesObj,$db,$curprofileid,$logedin,$role)
             {
                 foreach ($profileMessagesObj as $obj){
                     $profilePictureObj=$db->getPictureForUser($obj->senderid);
+                    if($profilePictureObj->filepath == null){$picture = "assets/images/default-user-image.png" }
+                    else{$picture = $profilePictureObj->filepath}
                     $userObj=$db->getUserFromID($obj->senderid);
-                    toonProfileMessage($userObj->username,$profilePictureObj->filepath,$obj->timestamp,$obj->message,'profile.php?id='.$userObj->userid,$obj->messageid,$role);
+                    toonProfileMessage($userObj->username,$picture,$obj->timestamp,$obj->message,'profile.php?id='.$userObj->userid,$obj->messageid,$role);
                 }
             }
 
