@@ -13,7 +13,8 @@ $passError = '';
 
 	if ( isset($_POST['btn-signup']) ) {
         $response = $_POST["g-recaptcha-response"];
-        if(!captcha::checkresponce($response)){$error = true;header("Location: register.php");}
+        if(!captcha::checkresponce($response)){$error = true;$errTyp = "danger";
+            $errMSG = "Incorrect Captcha";}
 
 		// clean user inputs to prevent sql injections
 		$name = trim($_POST['name']);

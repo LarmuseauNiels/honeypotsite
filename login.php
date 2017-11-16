@@ -17,7 +17,7 @@ if( isset($_POST['btn-login']) ) {
 
 	$response = $_POST["g-recaptcha-response"];
 	
-	if(!captcha::checkresponce($response)){$error = true;header("Location: login.php");}
+	if(!captcha::checkresponce($response)){$error = true;$errMSG = "Wrong Captcha";}
 		$email = trim($_POST['email']);
 		$email = strip_tags($email);
 		$email = htmlspecialchars($email);
