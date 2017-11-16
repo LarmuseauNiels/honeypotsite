@@ -41,10 +41,12 @@ function toonMessages($messages,$db,$a,$role)
   echo "<div class='row'>";
     foreach($messages as $message){
       $profilePictureObj=$db->getPictureForUser($message->userid);
+      if($profilePictureObj == null){$picture = "assets/images/default-user-image.png";}
+      else{$picture = profilePictureObj->filepath;}
       $userObj=$db->getUserFromID($message->userid);
       echo "  <div class='col-sm-2 text-center'>";
       echo           '<a href="'.'profile.php?id='.$message->userid.'">';
-      echo "    <img src='".$profilePictureObj->filepath."' class='img-circle' height='65' width='65' alt='Avatar'>";
+      echo "    <img src='".$picture."' class='img-circle' height='65' width='65' alt='Avatar'>";
       echo           '</a>';
       echo "  </div>";
       echo "  <div class='col-sm-10'>";
