@@ -12,6 +12,8 @@ $emailError = '';
 $passError = '';
 
 	if ( isset($_POST['btn-signup']) ) {
+        $response = $_POST["g-recaptcha-response"];
+        if(!captcha::checkresponce($response)){$error = true;header("Location: register.php");}
 
 		// clean user inputs to prevent sql injections
 		$name = trim($_POST['name']);
@@ -129,6 +131,9 @@ $passError = '';
 
         <div class="form-group">
             <hr />
+            <div class="captcha_wrapper">
+					<div class="g-recaptcha" data-sitekey="6Lfu_DgUAAAAAFSmpIZaudHNfZlJDq5GbHBa5Ofz"></div>
+			</div>
         </div>
 
         <div class="form-group">

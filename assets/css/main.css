@@ -21,11 +21,11 @@ footer {
 }
 
 #chatmessages{
-  height: 75%;
+  height: 63%;
   overflow: scroll;
   overflow-x:hidden;
 }
-.chatpostmessage{height: 22%}
+.chatpostmessage{height: 35%}
 .members{
   height: 90%;
   overflow: scroll;

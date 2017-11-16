@@ -62,21 +62,24 @@ function viewBodyProfile($profileMessagesObj,$db,$curprofileid,$logedin,$role)
 {
 
     ?>
-    <div id="commentBox" style='height:400px'><?php 
+    <div id="commentBox" style='height:350px'><?php 
         if($logedin){
             ?>
             <form role="form" method="POST" action="proceedmessage.php">
                 <input type="hidden" value="<?php echo $curprofileid ?>" name="profileid" />
                 <div class="form-group">
-                    <textarea name="message" class="form-control" rows="3" required></textarea>
+                    <textarea name="message" class="form-control" rows="1" required></textarea>
                 </div>
+                <div class="captcha_wrapper">
+					<div class="g-recaptcha" data-sitekey="6Lfu_DgUAAAAAFSmpIZaudHNfZlJDq5GbHBa5Ofz"></div>
+		        </div>
                 <button type="submit" name="submit" class="btn btn-success">Comment profile</button>
             </form>
             <br><br>
             <?php
         }
         echo "<p><span class='badge'>".sizeof($profileMessagesObj)."</span> Messages:</p><br>";
-        echo "<div class='row' id='messages' style='height:200px'> ";
+        echo "<div class='row' id='messages' style='height:120px'> ";
 
             function toonAlleMessages($profileMessagesObj,$db,$role)
             {

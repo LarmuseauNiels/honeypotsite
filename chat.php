@@ -12,9 +12,13 @@ if($authenticator->getLogedin()){
   $a = "";
   if(isset($_POST['submit']))
   {
+    $response = $_POST["g-recaptcha-response"];
+    if(captcha::checkresponce($response)){
     $message=$_POST['message'];
     $db->addMessage($userid,$message);
     header("Location: chat.php");
+  }
+    else{header("Location: chat.php");}
   }
 }
 $messages = $db->getMessages();
@@ -28,6 +32,9 @@ function showPostaMessage()
     <div class="form-group">
       <textarea name="message" class="form-control" rows="3" required></textarea>
     </div>
+    <div class="captcha_wrapper">
+					<div class="g-recaptcha" data-sitekey="6Lfu_DgUAAAAAFSmpIZaudHNfZlJDq5GbHBa5Ofz"></div>
+		</div>
     <button type="submit" name="submit" class="btn btn-success">Submit</button>
   </form>
   <?php
