@@ -44,6 +44,7 @@
                 <title>CCCP Chat</title>
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
+                <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none'">
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
                 <link rel="stylesheet" href="assets/css/main.css">
                 <link rel="stylesheet" href="assets/css/profileStyle.css">
@@ -56,6 +57,7 @@
                 <div class="container-fluid">
                     <div class="row content">
         <?php
+         header("X-Frame-Options: DENY");
     }
 
 
